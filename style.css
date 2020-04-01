@@ -35,3 +35,13 @@ button {
   border-radius: 5px;
   box-shadow: 2px 5px 5px #333;
 }
+
+.red{
+  color: #a11f1f;
+}
+.yellow{
+  color: rgb(199, 184, 45);
+}
+.green{
+  color: rgb(2, 151, 47);
+}

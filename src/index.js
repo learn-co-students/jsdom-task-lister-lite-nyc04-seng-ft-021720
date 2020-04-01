@@ -11,8 +11,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const elementType = 'li';
   const buttonElementType = 'button';
 
-  // the input field
-  const inputField = document.getElementById('new-task-description');
+  // the input fields
+  const descriptionField = document.getElementById('new-task-description');
+  const priorityField = document.getElementById('priority');
+
+  // link priorities to classes to add to them
+  const priorityToClass = {
+    low:    'green',
+    medium: 'yellow',
+    high:   'red'
+  };
 
   // add an event listener
   form.addEventListener('submit', function(event){
@@ -22,14 +30,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // create a new list item
     const newLi = document.createElement(elementType);
       
-    // grab the data from the form
-    const inputText = inputField.value;
+    // grab the data from the fields
+    const description = descriptionField.value;
+    const priority = priorityField.value;
 
     // add that data to the list item
-    newLi.append(inputText);
+    newLi.append(description);
+
+    // get the class from the priority
+    const theClass = priorityToClass[priority];
+    
+
+    // add a class to the list item
+    newLi.classList.add(theClass);
 
     // clear the input field
-    inputField.value = '';
+    descriptionField.value = '';
 
     // create a button element
     const deleteButton = document.createElement(buttonElementType)
