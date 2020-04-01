@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
     high:   'red'
   };
 
+  const priorityToNumber = {
+    low:    1,
+    medium: 2,
+    high:   3
+  }
+
   // add an event listener
   form.addEventListener('submit', function(event){
     // stop the network request from happening
@@ -40,9 +46,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // get the class from the priority
     const theClass = priorityToClass[priority];
     
-
     // add a class to the list item
     newLi.classList.add(theClass);
+
+    // add a sortable priority (number) to the dataset
+    const priorityNumber = priorityToNumber[priority];
+    newLi.dataset.priority = priorityNumber;
 
     // clear the input field
     descriptionField.value = '';
@@ -53,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // make it say "x" or "delete"
     deleteButton.append('X');
     
-    // add a click listener
+    // add a click listener for the delete button
     deleteButton.addEventListener('click', function(event){
       // delete the list item (the parent) if button clicked
       event.target.parentNode.remove();
@@ -63,7 +72,28 @@ document.addEventListener("DOMContentLoaded", () => {
     newLi.append(deleteButton);
     
     // append our new list item it to the parent
-    listParent.append(newLi);
+    if (priorityNumber == 1){
+
+      const existingLi = document.querySelector('[data-priority="2"]');
+      listParent.insertBefore(newLi, existingLi);
+
+    } else if (priorityNumber == 2){
+
+      const existingLi = document.querySelector('[data-priority="3"]');
+      listParent.insertBefore(newLi, existingLi);
+
+    } else if (priorityNumber == 3){
+
+      listParent.append(newLi);
+
+    } else {
+
+      // this case shouldn't happen
+      listParent.append(newLi);
+
+    }
+
+
   });
 
 });
