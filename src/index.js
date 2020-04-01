@@ -46,10 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const userBold = document.createElement('b');
     userBold.append(user);
 
+    // put the description in a span tag
+    const descriptionSpan = document.createElement('span');
+    descriptionSpan.append(description);
+
     // add the data to the list item
     newLi.append(userBold);
     newLi.append(': ');
-    newLi.append(description);
+    newLi.append(descriptionSpan);
 
     // get the class from the priority
     const theClass = priorityToClass[priority];
@@ -63,12 +67,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // clear the input field
     descriptionField.value = '';
+    userField.value = '';
 
-    // create a button element
-    const deleteButton = document.createElement(buttonElementType)
+    // create some button elements
+    const deleteButton = document.createElement(buttonElementType);
+    const editButton = document.createElement(buttonElementType);
 
-    // make it say "x" or "delete"
+    // make it say "X" for delete and "edit" for edit
     deleteButton.append('X');
+    editButton.append('edit');
+    
+    // add a click listener for the edit button
+    editButton.addEventListener('click', function(event){
+      // edit the list item (the parent) if button clicked
+      
+      // get the nodes
+      const userNode = event.target.parentNode.querySelector('b');
+      const descriptionNode = event.target.parentNode.querySelector('span');
+
+      // hide the nodes
+      event.target.classList.add('hide');
+      userNode.classList.add('hide');
+      descriptionNode.classList.add('hide');
+
+      // get the values from our text elements
+      let userText = userNode.textContent;
+      let descriptionText = descriptionNode.textContent;
+
+      // create new elements
+      userInput = document.createElement('input');
+      descriptionInput = document.createElement('input');
+      doneButton = document.createElement('button');
+
+      // pre-fill values into the fields
+      userInput.value = userText;
+      descriptionInput.value = descriptionText;
+      doneButton.append('done');
+      
+
+      // add some id's for accessing the values later
+      userInput.id = 'edit-user-field';
+      descriptionInput.id = 'edit-description-field';
+
+      // add the new elements to the page
+      event.target.parentNode.insertBefore(userInput, userNode);
+      event.target.parentNode.insertBefore(descriptionInput, descriptionNode);
+      newLi.insertBefore(doneButton, deleteButton);
+
+      doneButton.addEventListener('click', function(event){
+
+        // set the list items to the new value
+        userNode.textContent = userInput.value
+        descriptionNode.textContent = descriptionInput.value
+
+        // delete the input fields
+        userInput.remove();
+        descriptionInput.remove();
+        event.target.remove();
+
+        // show the updated nodes 
+        userNode.classList.remove('hide');
+        descriptionNode.classList.remove('hide');
+        editButton.classList.remove('hide');
+                
+      });
+    });
     
     // add a click listener for the delete button
     deleteButton.addEventListener('click', function(event){
@@ -76,8 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
       event.target.parentNode.remove();
     });
 
-    // append it to the list item
-    newLi.append(deleteButton);
+    // append the buttons to the list item
+    newLi.append(editButton, deleteButton);
     
     // append our new list item it to the parent
     if (priorityNumber == 1){

@@ -45,3 +45,7 @@ button {
 .green{
   color: rgb(2, 151, 47);
 }
+
+.hide{
+  display: none;
+}
