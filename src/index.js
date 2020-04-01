@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // the input fields
   const descriptionField = document.getElementById('new-task-description');
   const priorityField = document.getElementById('priority');
+  const userField = document.getElementById('user');
 
   // link priorities to classes to add to them
   const priorityToClass = {
@@ -39,8 +40,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // grab the data from the fields
     const description = descriptionField.value;
     const priority = priorityField.value;
+    const user = userField.value;
 
-    // add that data to the list item
+    // make the user text bold
+    const userBold = document.createElement('b');
+    userBold.append(user);
+
+    // add the data to the list item
+    newLi.append(userBold);
+    newLi.append(': ');
     newLi.append(description);
 
     // get the class from the priority
