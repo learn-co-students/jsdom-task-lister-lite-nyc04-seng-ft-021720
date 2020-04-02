@@ -28,9 +28,9 @@ while using your knowledge to write readable, maintainable code.
 
 ## Deliverables:
 
-- As a user, I should be able to type a task into the input field.
-- As a user, I should be able to click some form of a submit button.
-- As a user, the task string that I provided should appear on the DOM after the submit button has been activated.
+<!-- - As a user, I should be able to type a task into the input field. -->
+<!-- - As a user, I should be able to click some form of a submit button. -->
+<!-- - As a user, the task string that I provided should appear on the DOM after the submit button has been activated. -->
 
 **Note:** [While the example][example] shows one working application of TaskLister Lite™️, yours can (and is encouraged to!) look however you like.
 
@@ -47,7 +47,8 @@ Take a look at the [MDN Documentation on `Event.preventDefault`][mdn-pd]. You'll
 
 If you finish early, try to implement one or more of the following:
 
-- A delete function that will remove tasks from your list
+<!-- - A delete function that will remove tasks from your list -->
+<!-- add a collection select to the form that allows us to change the text.style.color -->
 - A priority value selected from a dropdown that is used to determine the color of the text in the list (e.g. red for high priority, yellow for medium, green for low)
   - As a challenge, implement a sorting functionality that displays the tasks ascending or descending order based on priority
 - An additional input field (e.g. user, duration, date due)
